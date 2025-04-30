@@ -1,48 +1,18 @@
-import java.util.ArrayList;
 import java.util.Scanner;
 
-class Admin {
-    private String username = "admin";
-    private String password = "admin123";
+public class Main {
+    private final Mahasiswa[] dataMahasiswa;
 
-    public boolean login(String inputUsername, String inputPassword) {
-        return this.username.equals(inputUsername) && this.password.equals(inputPassword);
-    }
-}
-
-class Mahasiswa {
-    private String nama;
-    private String nim;
-
-    public Mahasiswa(String nama, String nim) {
-        this.nama = nama;
-        this.nim = nim;
-    }
-
-    public boolean login(String inputNama, String inputNim) {
-        return this.nama.equals(inputNama) && this.nim.equals(inputNim);
-    }
-
-    public void displayInfo() {
-        System.out.println("Nama: " + this.nama);
-        System.out.println("NIM: " + this.nim);
-    }
-}
-
-public class LoginSystem {
-    private ArrayList<Mahasiswa> dataMahasiswa;
-
-    public LoginSystem() {
-        dataMahasiswa = new ArrayList<>();
-        // menambahkan data mahasiswa
-        dataMahasiswa.add(new Mahasiswa("Faiz Hidayat", "202410370110077"));
-        dataMahasiswa.add(new Mahasiswa("Ahmad Dzaky", "202410370110078"));
-        dataMahasiswa.add(new Mahasiswa("", "202410370110079"));
+    public Main() {
+        dataMahasiswa = new Mahasiswa[3];
+        dataMahasiswa[0] = new Mahasiswa("Faiz", "077");
+        dataMahasiswa[1] = new Mahasiswa("Ahmad", "078");
+        dataMahasiswa[2] = new Mahasiswa("Hazza", "066");
     }
 
     public void start() {
         Scanner scanner = new Scanner(System.in);
-        Admin admin = new Admin();
+        Admin admin = new Admin("Admin", "001");
 
         while (true) {
             System.out.println("\nPilih login:");
@@ -63,7 +33,7 @@ public class LoginSystem {
             scanner.nextLine();
 
             if (pilihan == 1) {
-                System.out.println("\nLogin sebagai Admin");
+                System.out.println("Login sebagai Admin");
                 System.out.print("Masukkan username: ");
                 String username = scanner.nextLine();
                 System.out.print("Masukkan password: ");
@@ -71,11 +41,11 @@ public class LoginSystem {
 
                 if (admin.login(username, password)) {
                     System.out.println("Login berhasil sebagai Admin");
+                    admin.displayInfo();
                 } else {
                     System.out.println("Username atau password Admin salah.");
                 }
-            }
-            else if (pilihan == 2) {
+            } else if (pilihan == 2) {
                 System.out.println("\nLogin sebagai Mahasiswa");
                 System.out.print("Masukkan nama: ");
                 String nama = scanner.nextLine();
@@ -94,9 +64,8 @@ public class LoginSystem {
                 if (!found) {
                     System.out.println("Nama atau NIM Mahasiswa salah.");
                 }
-            }
-            else if (pilihan == 3) {
-                System.out.println("Terima kasih telah menggunakan sistem ini!");
+            } else if (pilihan == 3) {
+                System.out.println("Terima kasih mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm!");
                 break;
             } else {
                 System.out.println("Pilihan tidak valid, coba lagi.");
@@ -107,7 +76,7 @@ public class LoginSystem {
     }
 
     public static void main(String[] args) {
-        LoginSystem loginSystem = new LoginSystem();
-        loginSystem.start();
+        Main main = new Main();
+        main.start();
     }
 }
